@@ -33,7 +33,7 @@ module.exports = async (req, res) => {
       Authorization: `Bearer ${resendApiKey}`,
     },
     body: JSON.stringify({
-      from: 'The Tribune <noreply@herringcoveresidences.ca>',
+      from: 'The Tribune <noreply@teamlodgr.com>',
       reply_to: email,
       to: ['Beth@duelproperties.com'],
       subject: `New Rental Inquiry — ${unitLabels[unit] || unit} — ${name}`,
