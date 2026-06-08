@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Tribune at Herring Cove — Coastal Apartments in Nova Scotia</title>
+  <meta name="description" content="Exquisite modern coastal living in the heart of Herring Cove, Nova Scotia. Discover our premium apartment collection featuring breathtaking ocean views and thoughtful design."/>
+  <link rel="icon" type="image/png" href="https://media.base44.com/images/public/69df8017caa73a3d7e636d51/e05bc1968_logo.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    hsl(215, 55%, 22%);
+      --navy-dk: hsl(215, 45%, 14%);
+      --cream:   hsl(40, 30%, 96%);
+      --amber:   hsl(32, 60%, 55%);
+      --bg:      hsl(210, 20%, 98%);
+      --fg:      hsl(215, 35%, 15%);
+      --muted:   hsl(215, 15%, 50%);
+      --border:  hsl(210, 18%, 88%);
+      --card:    #ffffff;
+      --radius:  0.625rem;
+      --display: 'Playfair Display', serif;
+      --body:    'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--body); color: var(--fg); background: var(--bg); line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 48px;
+      transition: background 0.3s, box-shadow 0.3s, padding 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--border);
+      padding: 14px 48px;
+    }
+    .nav-brand { font-family: var(--display); text-decoration: none; }
+    .nav-brand .brand-main { font-size: 1.25rem; font-weight: 700; color: white; line-height: 1.1; transition: color 0.3s; }
+    .nav-brand .brand-sub { font-size: 0.65rem; font-weight: 500; color: rgba(255,255,255,0.7); letter-spacing: 0.25em; text-transform: uppercase; transition: color 0.3s; }
+    nav.scrolled .brand-main { color: var(--navy); }
+    nav.scrolled .brand-sub { color: var(--muted); }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 0.88rem; font-weight: 500; text-decoration: none;
+      color: rgba(255,255,255,0.85); letter-spacing: 0.05em; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: white; }
+    nav.scrolled .nav-links a { color: var(--muted); }
+    nav.scrolled .nav-links a:hover { color: var(--navy); }
+    .nav-cta {
+      background: var(--amber); color: white !important;
+      padding: 9px 22px; border-radius: var(--radius);
+      font-weight: 600 !important; transition: opacity 0.2s !important;
+    }
+    .nav-cta:hover { opacity: 0.9; }
+    nav.scrolled .nav-cta { background: var(--navy); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6)),
+                  url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1600&q=80') center/cover no-repeat;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      padding: 120px 40px 80px;
+      color: white;
+    }
+    .hero-inner { max-width: 720px; }
+    .hero-eyebrow {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase;
+      color: rgba(255,255,255,0.7); margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: var(--display); font-size: clamp(3rem, 7vw, 5rem);
+      font-weight: 700; line-height: 1.05; margin-bottom: 8px;
+    }
+    .hero h1 .at { font-size: 0.45em; font-weight: 400; display: block; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 4px; }
+    .hero-sub {
+      font-size: 1.1rem; color: rgba(255,255,255,0.8); margin: 24px auto;
+      max-width: 500px; line-height: 1.7;
+    }
+    .hero-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 36px; }
+    .btn-primary {
+      background: var(--amber); color: white;
+      padding: 14px 32px; border-radius: var(--radius);
+      font-weight: 600; font-size: 0.95rem; text-decoration: none;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: white;
+      border: 1.5px solid rgba(255,255,255,0.5);
+      padding: 14px 32px; border-radius: var(--radius);
+      font-weight: 500; font-size: 0.95rem; text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: white; }
+
+    /* ── SECTIONS ── */
+    section { padding: 100px 48px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .eyebrow {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--amber); margin-bottom: 14px;
+    }
+    .section-heading {
+      font-family: var(--display); font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+      font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 1rem; color: var(--muted); max-width: 580px; line-height: 1.75;
+    }
+    .section-header { margin-bottom: 56px; }
+
+    /* ── UNITS ── */
+    #units { background: white; }
+    .units-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+    }
+    .unit-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .unit-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.1); transform: translateY(-3px); }
+    .unit-img-wrap { position: relative; height: 220px; overflow: hidden; }
+    .unit-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    .unit-card:hover .unit-img-wrap img { transform: scale(1.04); }
+    .unit-badge {
+      position: absolute; top: 14px; left: 14px;
+      padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 600;
+    }
+    .badge-available { background: #dcfce7; color: #166534; }
+    .badge-limited { background: #fef9c3; color: #854d0e; }
+    .unit-body { padding: 24px; }
+    .unit-name { font-family: var(--display); font-size: 1.25rem; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+    .unit-price-row { display: flex; align-items: baseline; gap: 6px; margin-bottom: 14px; }
+    .unit-from { font-size: 0.75rem; color: var(--muted); }
+    .unit-price { font-size: 1.6rem; font-weight: 700; color: var(--navy); }
+    .unit-mo { font-size: 0.85rem; color: var(--muted); }
+    .unit-specs { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+    .unit-spec { font-size: 0.82rem; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+    .unit-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
+    .btn-inquire {
+      display: block; width: 100%; text-align: center;
+      background: var(--navy); color: white;
+      padding: 12px; border-radius: var(--radius);
+      font-weight: 600; font-size: 0.9rem; text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-inquire:hover { background: hsl(215, 55%, 30%); }
+
+    /* ── AMENITIES ── */
+    #amenities { background: var(--bg); }
+    .amenities-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .amenities-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .amenity-item { display: flex; gap: 14px; align-items: flex-start; }
+    .amenity-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: hsl(215, 55%, 22%, 0.08); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .amenity-title { font-size: 0.9rem; font-weight: 600; color: var(--navy); margin-bottom: 3px; }
+    .amenity-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+    .amenities-image-wrap { position: relative; border-radius: 16px; overflow: hidden; }
+    .amenities-image-wrap img { width: 100%; height: 480px; object-fit: cover; display: block; }
+    .amenities-callout {
+      position: absolute; bottom: 24px; right: 24px;
+      background: white; border-radius: 12px; padding: 18px 22px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15); text-align: center;
+    }
+    .callout-num { font-family: var(--display); font-size: 2rem; font-weight: 700; color: var(--navy); line-height: 1; }
+    .callout-label { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+
+    /* ── LOCATION ── */
+    #location { background: white; }
+    .location-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .location-image { border-radius: 16px; overflow: hidden; }
+    .location-image img { width: 100%; height: 420px; object-fit: cover; display: block; }
+    .contact-block { margin-top: 36px; display: flex; flex-direction: column; gap: 16px; }
+    .contact-item { display: flex; gap: 14px; align-items: flex-start; }
+    .contact-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: hsl(215, 55%, 22%, 0.08); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .contact-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--amber); margin-bottom: 2px; }
+    .contact-value { font-size: 0.92rem; color: var(--fg); line-height: 1.5; }
+    .contact-value a { color: var(--navy); text-decoration: none; }
+    .contact-value a:hover { text-decoration: underline; }
+
+    /* ── INQUIRY ── */
+    #inquiry { background: var(--navy); color: white; }
+    #inquiry .eyebrow { color: var(--amber); }
+    #inquiry .section-heading { color: white; }
+    #inquiry .section-sub { color: rgba(255,255,255,0.65); }
+    .inquiry-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-grid .full { grid-column: 1 / -1; }
+    .field label {
+      display: block; font-size: 0.78rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.65); margin-bottom: 7px;
+    }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: 12px 14px;
+      background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius); color: white;
+      font-size: 0.9rem; font-family: var(--body);
+      outline: none; transition: border-color 0.2s;
+    }
+    .field input::placeholder, .field textarea::placeholder { color: rgba(255,255,255,0.35); }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--amber); }
+    .field select option { background: var(--navy-dk); color: white; }
+    .field textarea { resize: vertical; min-height: 120px; }
+    .btn-submit {
+      background: var(--amber); color: white;
+      padding: 14px 32px; border-radius: var(--radius);
+      font-weight: 600; font-size: 0.95rem; border: none;
+      cursor: pointer; font-family: var(--body);
+      transition: opacity 0.2s; width: 100%; margin-top: 4px;
+    }
+    .btn-submit:hover { opacity: 0.9; }
+    .inquiry-info { padding-top: 8px; }
+    .inquiry-info p { color: rgba(255,255,255,0.7); line-height: 1.75; font-size: 0.95rem; margin-bottom: 32px; }
+    .inquiry-detail { display: flex; flex-direction: column; gap: 20px; }
+    .inquiry-detail-item { display: flex; gap: 14px; align-items: flex-start; }
+    .idetail-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: rgba(255,255,255,0.08); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    }
+    .idetail-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--amber); margin-bottom: 3px; }
+    .idetail-value { font-size: 0.9rem; color: rgba(255,255,255,0.8); line-height: 1.5; }
+
+    /* ── SUCCESS MESSAGE ── */
+    .success-message {
+      display: none; text-align: center; padding: 40px 24px;
+    }
+    .success-message .checkmark { font-size: 3rem; margin-bottom: 16px; }
+    .success-message h3 { font-family: var(--display); font-size: 1.75rem; color: white; margin-bottom: 10px; }
+    .success-message p { color: rgba(255,255,255,0.7); font-size: 0.95rem; line-height: 1.7; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy-dk); color: rgba(255,255,255,0.6);
+      padding: 48px 48px 32px;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      flex-wrap: wrap; gap: 32px;
+    }
+    .footer-brand .brand-main { font-family: var(--display); font-size: 1.3rem; font-weight: 700; color: white; }
+    .footer-brand .brand-sub { font-size: 0.78rem; color: rgba(255,255,255,0.45); letter-spacing: 0.1em; margin-top: 4px; }
+    .footer-links { display: flex; gap: 28px; list-style: none; }
+    .footer-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .footer-links a:hover { color: white; }
+    .footer-copy {
+      max-width: 1200px; margin: 32px auto 0;
+      padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.82rem; text-align: center; color: rgba(255,255,255,0.35);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      nav.scrolled { padding: 14px 24px; }
+      .nav-links { gap: 20px; }
+      section { padding: 72px 24px; }
+      .amenities-layout, .location-layout, .inquiry-layout { grid-template-columns: 1fr; gap: 40px; }
+      .amenities-image-wrap { order: -1; }
+      .location-image { order: -1; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: 2.8rem; }
+      .units-grid { grid-template-columns: 1fr; }
+      .amenities-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; }
+      .footer-links { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#" class="nav-brand">
+    <div class="brand-main">The Tribune</div>
+    <div class="brand-sub">at Herring Cove</div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#units">Units</a></li>
+    <li><a href="#amenities">Amenities</a></li>
+    <li><a href="#location">Location</a></li>
+    <li><a href="#inquiry" class="nav-cta">Inquire</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Coastal Living in Nova Scotia</div>
+    <h1>
+      <span class="at">The Tribune</span>
+      at Herring Cove
+    </h1>
+    <p class="hero-sub">A wonderful community with stunning coastal views at your doorstep.</p>
+    <div class="hero-buttons">
+      <a href="#units" class="btn-primary">Explore Units</a>
+      <a href="#inquiry" class="btn-outline">Schedule a Tour</a>
+    </div>
+  </div>
+</section>
+
+<!-- UNITS -->
+<section id="units">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">Our Residences</div>
+      <h2 class="section-heading">Find Your Perfect Home</h2>
+      <p class="section-sub">Choose from thoughtfully designed one, two, and three bedroom layouts — each crafted for modern coastal living.</p>
+    </div>
+    <div class="units-grid">
+
+      <!-- 1 Bedroom -->
+      <div class="unit-card">
+        <div class="unit-img-wrap">
+          <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=80" alt="1 Bedroom Unit"/>
+          <span class="unit-badge badge-available">Available</span>
+        </div>
+        <div class="unit-body">
+          <div class="unit-name">1 Bedroom</div>
+          <div class="unit-price-row">
+            <span class="unit-from">Starting from</span>
+            <span class="unit-price">$1,450</span>
+            <span class="unit-mo">/mo</span>
+          </div>
+          <div class="unit-specs">
+            <span class="unit-spec">🛏 1 Bed</span>
+            <span class="unit-spec">🚿 1 Bath</span>
+            <span class="unit-spec">📐 620 sq ft</span>
+            <span class="unit-spec">🏡 Balcony</span>
+          </div>
+          <p class="unit-desc">A cozy, efficient layout perfect for singles or couples. Enjoy ocean breezes from your private balcony.</p>
+          <a href="#inquiry" class="btn-inquire">Inquire About This Unit</a>
+        </div>
+      </div>
+
+      <!-- 2 Bedroom -->
+      <div class="unit-card">
+        <div class="unit-img-wrap">
+          <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80" alt="2 Bedroom Unit"/>
+          <span class="unit-badge badge-limited">Limited</span>
+        </div>
+        <div class="unit-body">
+          <div class="unit-name">2 Bedroom</div>
+          <div class="unit-price-row">
+            <span class="unit-from">Starting from</span>
+            <span class="unit-price">$1,950</span>
+            <span class="unit-mo">/mo</span>
+          </div>
+          <div class="unit-specs">
+            <span class="unit-spec">🛏 2 Beds</span>
+            <span class="unit-spec">🚿 2 Baths</span>
+            <span class="unit-spec">📐 920 sq ft</span>
+            <span class="unit-spec">🏡 Balcony</span>
+          </div>
+          <p class="unit-desc">Spacious living with two full bathrooms, perfect for roommates or a small family. Open-concept kitchen and living area.</p>
+          <a href="#inquiry" class="btn-inquire">Inquire About This Unit</a>
+        </div>
+      </div>
+
+      <!-- 3 Bedroom -->
+      <div class="unit-card">
+        <div class="unit-img-wrap">
+          <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&q=80" alt="3 Bedroom Unit"/>
+          <span class="unit-badge badge-available">Available</span>
+        </div>
+        <div class="unit-body">
+          <div class="unit-name">3 Bedroom</div>
+          <div class="unit-price-row">
+            <span class="unit-from">Starting from</span>
+            <span class="unit-price">$2,650</span>
+            <span class="unit-mo">/mo</span>
+          </div>
+          <div class="unit-specs">
+            <span class="unit-spec">🛏 3 Beds</span>
+            <span class="unit-spec">🚿 2 Baths</span>
+            <span class="unit-spec">📐 1,280 sq ft</span>
+            <span class="unit-spec">🫧 In-Suite Laundry</span>
+          </div>
+          <p class="unit-desc">Our most spacious layout featuring generous living spaces, in-suite laundry, and panoramic coastal views.</p>
+          <a href="#inquiry" class="btn-inquire">Inquire About This Unit</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section id="amenities">
+  <div class="container">
+    <div class="amenities-layout">
+      <div>
+        <div class="eyebrow">Building Amenities</div>
+        <h2 class="section-heading">Everything You Need</h2>
+        <p class="section-sub">Thoughtful details and premium finishes in every corner. Our residences are designed for comfort, convenience, and the coastal lifestyle.</p>
+        <div class="amenities-grid" style="margin-top:40px;">
+          <div class="amenity-item">
+            <div class="amenity-icon">🌊</div>
+            <div>
+              <div class="amenity-title">Ocean Views</div>
+              <div class="amenity-desc">Panoramic Atlantic views from select units</div>
+            </div>
+          </div>
+          <div class="amenity-item">
+            <div class="amenity-icon">🚗</div>
+            <div>
+              <div class="amenity-title">Parking</div>
+              <div class="amenity-desc">Covered parking included with every unit</div>
+            </div>
+          </div>
+          <div class="amenity-item">
+            <div class="amenity-icon">🔐</div>
+            <div>
+              <div class="amenity-title">Secure Entry</div>
+              <div class="amenity-desc">Key fob access and intercom system</div>
+            </div>
+          </div>
+          <div class="amenity-item">
+            <div class="amenity-icon">⚡</div>
+            <div>
+              <div class="amenity-title">High-Speed Internet</div>
+              <div class="amenity-desc">Fibre-ready throughout the building</div>
+            </div>
+          </div>
+          <div class="amenity-item">
+            <div class="amenity-icon">🏋️</div>
+            <div>
+              <div class="amenity-title">Fitness Room</div>
+              <div class="amenity-desc">On-site gym with modern equipment</div>
+            </div>
+          </div>
+          <div class="amenity-item">
+            <div class="amenity-icon">🥾</div>
+            <div>
+              <div class="amenity-title">Trail Access</div>
+              <div class="amenity-desc">Direct access to coastal hiking trails</div>
+            </div>
+          </div>
+          <div class="amenity-item">
+            <div class="amenity-icon">🌡️</div>
+            <div>
+              <div class="amenity-title">Climate Control</div>
+              <div class="amenity-desc">In-suite heating and cooling</div>
+            </div>
+          </div>
+          <div class="amenity-item">
+            <div class="amenity-icon">🐾</div>
+            <div>
+              <div class="amenity-title">Pet Friendly</div>
+              <div class="amenity-desc">Cats and small dogs welcome</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="amenities-image-wrap">
+        <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&q=80" alt="Modern apartment interior with ocean views"/>
+        <div class="amenities-callout">
+          <div class="callout-num">15 min</div>
+          <div class="callout-label">to downtown Halifax</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location">
+  <div class="container">
+    <div class="location-layout">
+      <div>
+        <div class="eyebrow">Our Location</div>
+        <h2 class="section-heading">Herring Cove, Nova Scotia</h2>
+        <p class="section-sub">Nestled along the rugged Atlantic coastline, just 15 minutes from downtown Halifax. The perfect balance of nature and convenience.</p>
+        <div class="contact-block">
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="contact-label">Address</div>
+              <div class="contact-value">Herring Cove Road<br>Herring Cove, NS B3V 1K8</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-label">Phone</div>
+              <div class="contact-value"><a href="tel:9025550199">(902) 555-0199</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-value"><a href="mailto:leasing@herringcoveresidences.ca">leasing@herringcoveresidences.ca</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕐</div>
+            <div>
+              <div class="contact-label">Leasing Office Hours</div>
+              <div class="contact-value">
+                Mon–Fri: 9 AM – 5 PM<br>
+                Sat: 10 AM – 3 PM<br>
+                Sun: By appointment
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="location-image">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" alt="Herring Cove Nova Scotia coastline"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INQUIRY -->
+<section id="inquiry">
+  <div class="container">
+    <div class="inquiry-layout">
+      <div>
+        <div class="eyebrow">Get in Touch</div>
+        <h2 class="section-heading">Rental Inquiry</h2>
+        <div id="inquiry-form-wrap">
+          <form id="inquiry-form" onsubmit="submitInquiry(event)">
+            <div class="form-grid">
+              <div class="field">
+                <label>Full Name *</label>
+                <input type="text" placeholder="Jane Smith" required/>
+              </div>
+              <div class="field">
+                <label>Email *</label>
+                <input type="email" placeholder="jane@email.com" required/>
+              </div>
+              <div class="field">
+                <label>Phone</label>
+                <input type="tel" placeholder="(902) 555-0123"/>
+              </div>
+              <div class="field">
+                <label>Preferred Unit *</label>
+                <select required>
+                  <option value="" disabled selected>Select a unit</option>
+                  <option value="1br">1 Bedroom — $1,450/mo</option>
+                  <option value="2br">2 Bedroom — $1,950/mo</option>
+                  <option value="3br">3 Bedroom — $2,650/mo</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Preferred Move-In Date</label>
+                <input type="date"/>
+              </div>
+              <div class="field full">
+                <label>Message</label>
+                <textarea placeholder="Tell us about yourself, any questions, or special requirements..."></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn-submit">Submit Inquiry</button>
+          </form>
+        </div>
+        <div class="success-message" id="success-msg">
+          <div class="checkmark">✅</div>
+          <h3>Thank You!</h3>
+          <p>We've received your inquiry and will be in touch within 24 hours. We look forward to welcoming you to Herring Cove Residences.</p>
+        </div>
+      </div>
+      <div class="inquiry-info">
+        <p>Interested in making Herring Cove your home? Fill out the form and our leasing team will get back to you shortly.</p>
+        <div class="inquiry-detail">
+          <div class="inquiry-detail-item">
+            <div class="idetail-icon">📍</div>
+            <div>
+              <div class="idetail-label">Address</div>
+              <div class="idetail-value">Herring Cove Road<br>Herring Cove, NS B3V 1K8</div>
+            </div>
+          </div>
+          <div class="inquiry-detail-item">
+            <div class="idetail-icon">📞</div>
+            <div>
+              <div class="idetail-label">Phone</div>
+              <div class="idetail-value">(902) 555-0199</div>
+            </div>
+          </div>
+          <div class="inquiry-detail-item">
+            <div class="idetail-icon">✉️</div>
+            <div>
+              <div class="idetail-label">Email</div>
+              <div class="idetail-value">leasing@herringcoveresidences.ca</div>
+            </div>
+          </div>
+          <div class="inquiry-detail-item">
+            <div class="idetail-icon">🕐</div>
+            <div>
+              <div class="idetail-label">Office Hours</div>
+              <div class="idetail-value">Mon–Fri 9AM–5PM · Sat 10AM–3PM<br>Sun by appointment</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-main">Herring Cove Residences</div>
+      <div class="brand-sub">Coastal Living in Nova Scotia</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#units">Units</a></li>
+      <li><a href="#amenities">Amenities</a></li>
+      <li><a href="#location">Location</a></li>
+      <li><a href="#inquiry">Inquire</a></li>
+    </ul>
+  </div>
+  <div class="footer-copy">© <span id="year"></span> Herring Cove Residences. All rights reserved.</div>
+</footer>
+
+<script>
+  // Sticky nav
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Form submit (no backend — shows success message)
+  function submitInquiry(e) {
+    e.preventDefault();
+    document.getElementById('inquiry-form-wrap').style.display = 'none';
+    document.getElementById('success-msg').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
