@@ -653,9 +653,27 @@
   // Footer year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Form submit (no backend — shows success message)
-  function submitInquiry(e) {
+  async function submitInquiry(e) {
     e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('.btn-submit');
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+
+    const fields = form.querySelectorAll('input, select, textarea');
+    const [name, email, phone, unit, moveIn, message] = [...fields].map(f => f.value);
+
+    try {
+      const res = await fetch('/api/inquire', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, unit, moveIn, message }),
+      });
+      if (!res.ok) throw new Error('Failed');
+    } catch (err) {
+      console.error(err);
+    }
+
     document.getElementById('inquiry-form-wrap').style.display = 'none';
     document.getElementById('success-msg').style.display = 'block';
   }
